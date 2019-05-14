@@ -1,0 +1,6 @@
+README.md
+jp_wh1.egg-info/PKG-INFO
+jp_wh1.egg-info/SOURCES.txt
+jp_wh1.egg-info/dependency_links.txt
+jp_wh1.egg-info/requires.txt
+jp_wh1.egg-info/top_level.txt
