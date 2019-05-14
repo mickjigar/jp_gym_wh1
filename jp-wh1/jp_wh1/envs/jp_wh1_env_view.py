@@ -2,7 +2,7 @@ import gym
 from gym import error, spaces, utils
 from gym.utils import seeding
 import numpy as np
-
+#added some comment for gitHub
 class JpWh1(gym.Env):
 
     metadata = {'reder.modes': ['human']}
