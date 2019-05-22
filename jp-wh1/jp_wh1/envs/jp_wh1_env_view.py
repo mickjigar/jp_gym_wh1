@@ -316,3 +316,49 @@ class Warehouse:
 
         else:
             np.save(file_path, self.maze_cells, allow_pickle=False, fix_imports=True)
+
+    @classmethod
+    def load_warehouse(cls, file_path):
+
+        if not isinstance(file_path, str):
+            raise TypeError("Invalid file_path. Must be a str")
+
+        if not os.path.exists(file_path):
+            raise ValueError("Cannot find %s." % file_path)
+
+        else:
+            return np.load(file_path, allow_pickle=False, fix_imports=True)
+
+    def __generate_warehouse(self):
+        #list of all cell locations
+        self.warehoues_cells = np.zeros(self.warehouse_size, dtype=int)
+
+    @property
+    def WAREHOUSE_W(self):
+        return int(self.warehouse_size[0])
+
+    @property
+    def WAREHOUSE_H(self):
+        return int(self.warehouse_size[1])
+
+    def is_open(self, cell_id, dir, other_robot_cell_id):
+        #check if it would be out-of-bound
+        x1 = cell_id[0] + self.COMPASS[dir][0]
+        y1 = cell_id[1] + self.COMPASS[dir][1]
+
+
+        #if cell is still within bounds after the move
+        if x1 == other_robot_cell_id[0] and y1 == other_robot_cell_id[1]:
+            return False
+        else:
+            return self.is_within_bound(x1, y1)
+
+    def is_within_bound(self, x, y):
+        #true if cell is still within bounds after the move
+        return 0 <= x < self.WAREHOUSE_W and 0 <= y < self.WAREHOUSE_H
+
+if __name__ == "__main__":
+
+    warehouse = WarehouseView2D(screen_size=(600,600), warehouse_size=(15,600))
+    warehouse.update()
+    input("Enter any key to quit.")
